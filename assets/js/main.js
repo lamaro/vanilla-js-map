@@ -1,6 +1,3 @@
-//import styles from '../data/mapStyles'
-//import markesJson from '../data/markers.json'
-
 let markersAll = []; //array con todos los markers
 
 //Inicializo el mapa (callback en script google api en index.html)
