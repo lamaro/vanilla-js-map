@@ -1,5 +1,5 @@
-import styles from '../data/mapStyles'
-import markesJson from '../data/markers.json'
+//import styles from '../data/mapStyles'
+//import markesJson from '../data/markers.json'
 
 let markersAll = []; //array con todos los markers
 
@@ -59,9 +59,9 @@ window.initMap = () => {
 //Función de asincrónica que trae los markers
 const fetchMarkers = async (map) => { 
     try {
-        const response = await fetch('../assets/data/markers.json');
-        console.log(response)
+        const response = await fetch('https://cervecerias-api-rest.now.sh/cervecerias');
         const json = await response.json();
+        console.log(json)
         json.forEach(marker => {
             addMarker(map, marker);
         });
@@ -96,7 +96,7 @@ const addMarker = (map, marker) => {
     //Agrego el marker
     const markerItem = new google.maps.Marker(
         {
-            position: { lat: lat, lng: lng },
+            position: { lat: parseFloat(lat), lng: parseFloat(lng) },
             icon: icons[type],
             map: map,
             customInfo: type
