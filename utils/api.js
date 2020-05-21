@@ -1,4 +1,5 @@
-const baseUrl = 'http://localhost:3000/';
+//const baseUrl = 'http://localhost:3000/';
+const baseUrl = 'https://cervecerias-api-rest.now.sh/';
 
 const apiHeaders = {
     'Content-Type': 'application/json',
@@ -6,9 +7,10 @@ const apiHeaders = {
 }
 
 const fetchParams = (method, data = '') => {
-    const body = data ? {body: JSON.stringify(data)} : {}
+    const body = data ? { body: JSON.stringify(data) } : {}
+    console.log(body)
     return {
-        method:method,
+        method: method,
         headers: apiHeaders,
         credentials: 'same-origin',
         ...body
@@ -16,9 +18,22 @@ const fetchParams = (method, data = '') => {
 }
 
 const api = {
-    //GET
+    //Funciones CRUD
+    //CREATE (To be continued...)
+    createCervecerias: async formData => {
+        const dataResponse = await fetch(baseUrl + 'cerveceria/' + formData.id, fetchParams('POST', formData));
+        const dataInfo = await dataResponse.json();
+        return dataInfo;
+    },
+    //READ
     getCervecerias: async () => {
         const dataResponse = await fetch(baseUrl + 'cervecerias', fetchParams('GET'));
+        const dataInfo = await dataResponse.json();
+        return dataInfo;
+    },
+    //UPDATE
+    updateCervecerias: async formData => {
+        const dataResponse = await fetch(baseUrl + 'cerveceria/' + formData.id, fetchParams('PUT', formData));
         const dataInfo = await dataResponse.json();
         return dataInfo;
     },
@@ -27,8 +42,5 @@ const api = {
         const dataResponse = await fetch(baseUrl + 'cerveceria/' + id, fetchParams('DELETE'));
         const dataInfo = await dataResponse.json();
         return dataInfo;
-    }
-    //PUT
-
-    //POST
+    },
 }
