@@ -3,7 +3,8 @@ const baseUrl = 'https://cervecerias-api-rest.now.sh/';
 
 const apiHeaders = {
     'Content-Type': 'application/json',
-    Accept: 'application/json'
+    Accept: 'application/json',
+    mode: "no-cors"
 }
 
 const fetchParams = (method, data = '') => {
@@ -12,7 +13,7 @@ const fetchParams = (method, data = '') => {
     return {
         method: method,
         headers: apiHeaders,
-        credentials: 'same-origin',
+        //credentials: 'same-origin',
         ...body
     }
 }
