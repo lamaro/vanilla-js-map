@@ -4,16 +4,22 @@ const baseUrl = 'https://cervecerias-api-rest.now.sh/';
 const apiHeaders = {
     'Content-Type': 'application/json',
     Accept: 'application/json',
-    mode: "no-cors"
 }
+
+//Otra forma de agregar headers
+// const apiHeaders = new Headers();
+// apiHeaders.append('Content-Type', 'application/json');
+// apiHeaders.append('Accept', 'application/json');
+
 
 const fetchParams = (method, data = '') => {
     const body = data ? { body: JSON.stringify(data) } : {}
     console.log(body)
     return {
         method: method,
+        mode: 'cors',
         headers: apiHeaders,
-        //credentials: 'same-origin',
+        credentials: 'same-origin',
         ...body
     }
 }
