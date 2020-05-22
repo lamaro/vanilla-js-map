@@ -1,5 +1,5 @@
-//const baseUrl = 'http://localhost:3000/';
-const baseUrl = 'https://cervecerias-api-rest.now.sh/';
+const baseUrl = 'http://localhost:3000/';
+//const baseUrl = 'https://cervecerias-api-rest.now.sh/';
 
 const apiHeaders = {
     'Content-Type': 'application/json',
@@ -17,7 +17,6 @@ const fetchParams = (method, data = '') => {
     console.log(body)
     return {
         method: method,
-        mode: 'cors',
         headers: apiHeaders,
         credentials: 'same-origin',
         ...body

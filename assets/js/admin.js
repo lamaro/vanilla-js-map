@@ -88,7 +88,7 @@ document.addEventListener('submit', (event) => {
         "lat": $form_field_lat.value,
         "lng": $form_field_lng.value,
         "name": $form_field_name.value,
-        "description:": $form_field_description.value,
+        "description": $form_field_description.value,
         "type": $form_field_type.value
     }
     updateCerveceria(formData);
