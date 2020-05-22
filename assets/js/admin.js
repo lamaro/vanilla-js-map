@@ -53,7 +53,7 @@ getCervecerias(); //Llamo a la función cuando carga la página
 //DELETE
 const deleteCerveceria = async (id) => {
     const result = await api.deleteCervecerias(id);
-    console.log('Deleted')
+    console.log('Deleted',result)
     getCervecerias();
 }
 const handleClickDelete = async () => {
@@ -62,8 +62,8 @@ const handleClickDelete = async () => {
 }
 
 //UPDATE
-const updateCerveceria = async (data) => {
-    const result = await api.updateCervecerias(data);
+const updateCerveceria = async (data,id) => {
+    const result = await api.updateCervecerias(data,id);
     console.log('Updated', result)
     getCervecerias();
 }
@@ -81,23 +81,41 @@ const completeForm = (reg) => {
     $form_field_description.value = description;
     $form_field_type.value = type;
 }
-document.addEventListener('submit', (event) => {
+
+//CREATE
+const createCerveceria = async (data) => {
+    const result = await api.createCervecerias(data);
+    console.log('Created',result)
+    getCervecerias();
+}
+
+//FORM (Update o Create)
+$form_main.addEventListener('submit', (event) => {
     event.preventDefault();
+    const id = $form_field_id.value
     const formData = {
-        "id": $form_field_id.value,
         "lat": $form_field_lat.value,
         "lng": $form_field_lng.value,
         "name": $form_field_name.value,
         "description": $form_field_description.value,
         "type": $form_field_type.value
     }
-    updateCerveceria(formData);
+    updateCerveceria(formData,id);
+    
+    //To be continued... 
+    //Buscando usar el mismo form cuando hace update o create.
+    //Chequear que si el id viene vacio es create, sino es update
+    //createCerveceria(formData)
+
+    //Reseteo el form
+    $form_field_id.value = '';
+    $form_main.reset();
 })
 
-//CREATE
-//...
-//To be continued...
+
 
 // Dr. Emmett Brown: Marty! I need you to go back with me!
 // Marty McFly: Where?
 // Dr. Emmett Brown: Back to the Future!
+
+//To be continued...

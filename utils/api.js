@@ -14,7 +14,6 @@ const apiHeaders = {
 
 const fetchParams = (method, data = '') => {
     const body = data ? { body: JSON.stringify(data) } : {}
-    console.log(body)
     return {
         method: method,
         headers: apiHeaders,
@@ -27,7 +26,7 @@ const api = {
     //Funciones CRUD
     //CREATE (To be continued...)
     createCervecerias: async formData => {
-        const dataResponse = await fetch(baseUrl + 'cerveceria/' + formData.id, fetchParams('POST', formData));
+        const dataResponse = await fetch(baseUrl + 'cervecerias', fetchParams('POST', formData));
         const dataInfo = await dataResponse.json();
         return dataInfo;
     },
@@ -38,8 +37,8 @@ const api = {
         return dataInfo;
     },
     //UPDATE
-    updateCervecerias: async formData => {
-        const dataResponse = await fetch(baseUrl + 'cerveceria/' + formData.id, fetchParams('PUT', formData));
+    updateCervecerias: async (formData,id) => {
+        const dataResponse = await fetch(baseUrl + 'cerveceria/' + id, fetchParams('PUT', formData));
         const dataInfo = await dataResponse.json();
         return dataInfo;
     },
