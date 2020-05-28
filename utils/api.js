@@ -24,8 +24,8 @@ const fetchParams = (method, data = '') => {
 
 const api = {
     //Funciones CRUD
-    //CREATE (To be continued...)
-    createCervecerias: async formData => {
+    //CREATE
+    createCerveceria: async formData => {
         const dataResponse = await fetch(baseUrl + 'cervecerias', fetchParams('POST', formData));
         const dataInfo = await dataResponse.json();
         return dataInfo;

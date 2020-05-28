@@ -15,3 +15,5 @@ a:hover{opacity: .8;}
 #btn_agregar_wrapper{display: flex; justify-content: flex-end;margin-bottom:40px;}
 .inner{max-width: 1200px;margin:auto;}
 #listado .item{display: flex;justify-content: space-between;align-items: center;border-bottom: 3px solid #fafafa;}
+#form_main{display:none;}
+#form_main.active{display:block;}

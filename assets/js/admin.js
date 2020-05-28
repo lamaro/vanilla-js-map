@@ -7,6 +7,8 @@ const $form_field_description = document.querySelector('#form_field_description'
 const $form_field_type = document.querySelector('#form_field_type');
 const $form_field_id = document.querySelector('#form_field_id'); //Se agregó el campo ID como input hidden
 const $form_main = document.querySelector('#form_main');
+const $add_button = document.querySelector('.handleAdd');
+
 
 //READ
 const getCervecerias = async (id = '') => {
@@ -53,7 +55,7 @@ getCervecerias(); //Llamo a la función cuando carga la página
 //DELETE
 const deleteCerveceria = async (id) => {
     const result = await api.deleteCervecerias(id);
-    console.log('Deleted',result)
+    console.log('Deleted', result)
     getCervecerias();
 }
 const handleClickDelete = async () => {
@@ -62,14 +64,15 @@ const handleClickDelete = async () => {
 }
 
 //UPDATE
-const updateCerveceria = async (data,id) => {
-    const result = await api.updateCervecerias(data,id);
+const updateCerveceria = async (data, id) => {
+    const result = await api.updateCervecerias(data, id);
     console.log('Updated', result)
     getCervecerias();
 }
 const handleClickEdit = async () => {
     const id = event.target.dataset.id;
     const reg = await getCervecerias(id);
+    $form_main.classList.add("active");
     completeForm(reg)
 }
 const completeForm = (reg) => {
@@ -84,10 +87,20 @@ const completeForm = (reg) => {
 
 //CREATE
 const createCerveceria = async (data) => {
-    const result = await api.createCervecerias(data);
-    console.log('Created',result)
+    const result = await api.createCerveceria(data);
+    console.log('Created', result)
     getCervecerias();
 }
+
+const handleClickAdd = (event) => {
+    event.preventDefault();
+    $form_field_id.value = '';
+    $form_main.reset();
+    $form_main.classList.add("active");
+    $form_field_lat.focus();
+}
+
+$add_button.addEventListener('click', handleClickAdd)
 
 //FORM (Update o Create)
 $form_main.addEventListener('submit', (event) => {
@@ -100,8 +113,13 @@ $form_main.addEventListener('submit', (event) => {
         "description": $form_field_description.value,
         "type": $form_field_type.value
     }
-    updateCerveceria(formData,id);
-    
+    $form_main.classList.remove("active");
+    if (id === '') {
+        createCerveceria(formData)
+    } else {
+        updateCerveceria(formData, id);
+    }
+
     //To be continued... 
     //Buscando usar el mismo form cuando hace update o create.
     //Chequear que si el id viene vacio es create, sino es update
