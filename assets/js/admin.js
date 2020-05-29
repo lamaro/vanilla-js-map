@@ -119,12 +119,6 @@ $form_main.addEventListener('submit', (event) => {
     } else {
         updateCerveceria(formData, id);
     }
-
-    //To be continued... 
-    //Buscando usar el mismo form cuando hace update o create.
-    //Chequear que si el id viene vacio es create, sino es update
-    //createCerveceria(formData)
-
     //Reseteo el form
     $form_field_id.value = '';
     $form_main.reset();
